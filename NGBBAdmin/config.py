@@ -13,3 +13,9 @@ method = {
 
 method_choices = [(int(choice_num), choice_text) for choice_num, choice_text in method.items()]
 feature_choices = [(int(choice_num), choice_text) for choice_num, choice_text in feature.items()]
+
+positive_choices = (
+    (0, 'Negative'),
+    (1, 'Positive'),
+    (2, 'Neutral')
+)

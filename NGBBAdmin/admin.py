@@ -4,8 +4,10 @@ from .models import *
 from simple_history.admin import SimpleHistoryAdmin
 from .config import *
 
-class NGAdmin(SimpleHistoryAdmin):
+class NGAdminBase(SimpleHistoryAdmin):
     save_on_top = False
+
+class NGAdmin(NGAdminBase):
     search_fields = ('url',)
 
 def url_f(obj):
@@ -28,3 +30,4 @@ class BLAPI(NGAdmin):
 # Register your models here.
 admin.site.register(BotList, NGAdmin)
 admin.site.register(BotListApi, BLAPI)
+admin.site.register(BotListFeature, NGAdminBase)

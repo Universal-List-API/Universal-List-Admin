@@ -41,11 +41,18 @@ class BotListApi(models.Model):
 register(BotListApi)
 
 class BotListFeature(models.Model):
+    feature_id = models.IntegerField(primary_key = True)
     name = models.TextField(unique=True)
-    iname = models.TextField(unique=True)
+    iname = models.TextField(unique=True, verbose_name = "Internal Name")
     description = models.TextField(blank=True, null=True)
-    positive = models.IntegerField(blank=True, null=True)
+    positive = models.IntegerField(blank=False, null=False, choices = positive_choices)
 
     class Meta:
         managed = False
         db_table = 'bot_list_feature'
+
+    def __str__(self):
+        return self.name
+
+register(BotListFeature)
+
