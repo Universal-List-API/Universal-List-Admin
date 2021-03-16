@@ -14,6 +14,8 @@ class BotList(models.Model):
     description = models.TextField(blank=True, null=True)
     supported_features = ArrayField(base_field = models.IntegerField(), blank=True, null=True)
     api_token = models.TextField(blank=False, null=False, default = uuid.uuid4())
+    queue = models.BooleanField(blank=False, null=False, default=False)
+    owners = ArrayField(base_field = models.BigIntegerField(), blank=False, null=False, default=list)
 
     class Meta:
         managed = False
@@ -26,10 +28,10 @@ register(BotList)
 
 class BotListApi(models.Model):
     url = models.OneToOneField(BotList, on_delete = models.CASCADE, db_column='url', primary_key = True)
-    method = models.IntegerField(blank=False, null=False, choices = method_choices)
-    feature = models.IntegerField(blank=False, null=False, choices = feature_choices)
+    method = models.IntegerField(blank=False, null=False, choices = method_choices, default=1)
+    feature = models.IntegerField(blank=False, null=False, choices = feature_choices, default=1)
     supported_fields = models.JSONField(blank=False, null=False, help_text = 'Format of each key, valae is NGBB_KEY: LIST_KEY where NGBB_KEY is the key used by NGBB and LIST_KEY is the key used by the list')
-    api_path = models.TextField(blank=False, null=False)
+    api_path = models.TextField(blank=False, null=False, default="")
 
     class Meta:
         managed = False
