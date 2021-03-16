@@ -31,7 +31,7 @@ class BotListApi(models.Model):
     url = models.ForeignKey(BotList, on_delete = models.CASCADE, db_column = 'url', db_constraint = False, unique = False, db_index = False, blank = True)
     method = models.IntegerField(blank=False, null=False, choices = method_choices, default=1)
     feature = models.IntegerField(blank=False, null=False, choices = feature_choices, default=1)
-    supported_fields = models.JSONField(blank=False, null=False, help_text = 'Format of each key, valae is NGBB_KEY: LIST_KEY where NGBB_KEY is the key used by NGBB and LIST_KEY is the key used by the list')
+    supported_fields = models.JSONField(blank=True, null=True, help_text = 'Format of each key, valae is NGBB_KEY: LIST_KEY where NGBB_KEY is the key used by NGBB and LIST_KEY is the key used by the list')
     api_path = models.TextField(blank=False, null=False, default="")
 
     class Meta:
