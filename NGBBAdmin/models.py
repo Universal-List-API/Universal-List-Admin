@@ -7,8 +7,9 @@ from .config import *
 # Create your models here.
 
 class BotList(models.Model):
+    id = models.AutoField(primary_key = True)
     icon = models.TextField(blank=True, null=True)
-    url = models.TextField(unique=True, primary_key = True)
+    url = models.TextField(unique=True)
     api_url = models.TextField(blank=True, null=True)
     discord = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -27,7 +28,8 @@ class BotList(models.Model):
 register(BotList)
 
 class BotListApi(models.Model):
-    url = models.OneToOneField(BotList, on_delete = models.CASCADE, db_column='url', primary_key = True)
+    id = models.AutoField(primary_key = True)
+    url = models.TextField(unique = False)
     method = models.IntegerField(blank=False, null=False, choices = method_choices, default=1)
     feature = models.IntegerField(blank=False, null=False, choices = feature_choices, default=1)
     supported_fields = models.JSONField(blank=False, null=False, help_text = 'Format of each key, valae is NGBB_KEY: LIST_KEY where NGBB_KEY is the key used by NGBB and LIST_KEY is the key used by the list')
